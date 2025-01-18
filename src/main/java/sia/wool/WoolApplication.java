@@ -1,13 +1,13 @@
-package sia.taco;
+package sia.wool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication //include: @SpringBootConfiguration, @EnableAutoConfiguration, @ComponentScan(@Component, @Controller и @Service)
-public class TacoApplication {
+public class WoolApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TacoApplication.class, args);
+		SpringApplication.run(WoolApplication.class, args);
 	}// args = cmd args
 
 }
