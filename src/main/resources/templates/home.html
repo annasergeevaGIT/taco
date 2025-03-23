@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>WoolMix Cloud</title>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon.svg}">
 </head>
 <body>
-    <h1>Welcome to WoolMix</h1>
-    <img th:src="@{/images/sheep.jpg}" alt="Wool sheep" width="200" height="150">
+<h1>Welcome to Taco Cloud</h1>
+<img th:src="@{/images/TacoShop.png}" style="max-width: 360px; height: auto;"/>
 </body>
 </html>

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #401E19;
+    font-weight: 600;
+}
+
+img.taco-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+button {
+    margin-top: 25px;
+    margin-bottom: 50px;
+    background-color: #ff6600; /* Nice orange color */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover effect */
+button:hover {
+    background-color: #e65c00;
+    transform: scale(1.05);
+}
+
+/* Click effect */
+button:active {
+    transform: scale(0.95);
+}
+
+.validationError {
+    color: red;
+}
