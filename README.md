@@ -43,24 +43,23 @@ Taco Cloud is a sample web application built to demonstrate concepts from *Sprin
 
    ```bash
    git clone https://github.com/annasergeevaGIT/taco.git
-   cd taco-cloud
+   cd taco
 
 Build the Project:
 
 Use Maven to build the project:
 
-    ```bash
-    mvn clean install
+mvn clean install
+
 1. **Run the Application:**
 
 Run the Spring Boot application using Maven:
-    
-    ```bash
-    mvn spring-boot:run
+
+      mvn spring-boot:run
+
 Alternatively, run the generated jar file:
 
-    ```bash
-    java -jar target/taco-cloud-0.0.1-SNAPSHOT.jar
+      java -jar target/taco-cloud-0.0.1-SNAPSHOT.jar
 
 Access the App:
 
@@ -68,7 +67,6 @@ Open your web browser and navigate to http://localhost:8080 to access Taco Cloud
 
 Project Structure
 -----------------
-    ```bash
     taco/
     ├── src/
     │   ├── main/
