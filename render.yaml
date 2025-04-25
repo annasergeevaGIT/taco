@@ -1,5 +1,0 @@
-services:
-  - type: web
-    name: tacoapp
-    env: docker
-    plan: free
