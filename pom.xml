@@ -104,6 +104,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
+						<!--
 						<image>
 							<env>
 								<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
@@ -111,8 +112,8 @@
 						</image>
 						<docker>
 							<host>//./pipe/dockerDesktopLinuxEngine</host>
-						</docker>
-
+						#</docker>
+						-->
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>

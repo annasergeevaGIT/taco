@@ -33,9 +33,9 @@ Taco Cloud is a sample web application built to demonstrate concepts from *Sprin
 
 ### Prerequisites
 
-- **Java 11** or higher.
+- **Java 17**
 - **Maven** installed.
-- An IDE (e.g., IntelliJ IDEA or Eclipse) for development.
+- An IDE (IntelliJ IDEA) for development.
 
 ### Setup
 
