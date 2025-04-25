@@ -46,3 +46,28 @@ button:active {
 .validationError {
     color: red;
 }
+
+.button-link {
+    display: inline-block;
+    background-color: #ff6600;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+/* Hover effect to match your button */
+.button-link:hover {
+    background-color: #e65c00;
+    transform: scale(1.05);
+}
+
+.button-link:active {
+    transform: scale(0.95);
+}
