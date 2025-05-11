@@ -1,6 +1,9 @@
 # Taco Cloud
 
-Taco Cloud is a sample web application built to demonstrate concepts from *Spring in Action*. This project allows users to design taco creations, place orders, and validate delivery and payment information using Spring Boot, Thymeleaf, and other Spring technologies.
+Taco Cloud is a full-stack web application that allows users to design custom tacos, place orders, and validate delivery and payment information. Built with Spring Boot and Thymeleaf, the application is containerized using Docker, uses PostgreSQL for persistent storage, and integrates Spring Actuator for monitoring. APIs are tested via Postman.
+
+🔗 Live Demo: [Taco Cloud on Render](https://taco-deployment-latest.onrender.com/)
+🗄️ PostgreSQL hosted on: [Neon]()
 
 ## Table of Contents
 
