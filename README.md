@@ -2,17 +2,15 @@
 
 Taco Shop is a web application that allows users to design custom tacos, place orders, and validate delivery and payment information. Built with Spring Boot and Thymeleaf, the application is containerized using Docker, uses PostgreSQL for persistent storage, and integrates Spring Actuator for monitoring.
 
-🔗 Live Demo: [Taco Cloud on Render](https://taco-deployment-latest.onrender.com/)
-🗄️ PostgreSQL hosted on: [Neon]()
+🔗 Live Demo: [here](https://taco-deployment-latest.onrender.com/)
 
 ### Table of Contents
 
 - [Features](#features)
 - [Technologies](#technologies)
 - [Getting Started](#getting-started)
+- [Deployment](#deployment)
 - [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Validation & Error Handling](#validation--error-handling)
 - [License](#license)
 
 ### Features
@@ -131,9 +129,7 @@ Project Structure
       │   │       ├── application.properties # Spring Boot configuration
       │   │       └── logback.xml # Logging configuration
       │   └── test/ # Test source files
-      │       └── ... (contents not fully detailed in image/text)
       ├── .env # Environment variables used in deployment
-      ├── .gitignore # Files ignored by Git
       ├── docker-compose.yaml # Cloud Postgres & PgAdmin configuration
       ├── Dockerfile # Docker build used in Render deployment
       ├── LICENSE # Project License
