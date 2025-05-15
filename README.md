@@ -1,11 +1,11 @@
-# Taco Cloud
+# Taco Shop
 
-Taco Cloud is a full-stack web application that allows users to design custom tacos, place orders, and validate delivery and payment information. Built with Spring Boot and Thymeleaf, the application is containerized using Docker, uses PostgreSQL for persistent storage, and integrates Spring Actuator for monitoring. APIs are tested via Postman.
+Taco Shop is a web application that allows users to design custom tacos, place orders, and validate delivery and payment information. Built with Spring Boot and Thymeleaf, the application is containerized using Docker, uses PostgreSQL for persistent storage, and integrates Spring Actuator for monitoring.
 
 🔗 Live Demo: [Taco Cloud on Render](https://taco-deployment-latest.onrender.com/)
 🗄️ PostgreSQL hosted on: [Neon]()
 
-## Table of Contents
+### Table of Contents
 
 - [Features](#features)
 - [Technologies](#technologies)
@@ -15,15 +15,15 @@ Taco Cloud is a full-stack web application that allows users to design custom ta
 - [Validation & Error Handling](#validation--error-handling)
 - [License](#license)
 
-## Features
+### Features
 
-- **Taco Design:** Customize tacos by choosing from various ingredients like wraps, proteins, cheeses, veggies, and sauces.
-- **Order Submission:** Review taco selections and submit an order with delivery and payment details.
-- **Server-Side Validation:** Input is validated on the server using annotations such as `@NotBlank`, `@Pattern`, and `@Digits`.
-- **Session Management:** Manage orders through session attributes, allowing users to design multiple tacos before placing the order.
-- **Responsive UI:** Render a user-friendly interface using Thymeleaf templates styled with CSS.
+- **Ingredient Selection**: Users can choose from a variety of ingredients to customize their tacos.
+- **Order Management**: Users can view their orders and track the status of their taco creations.
+- **Responsive Design**: The app is designed to work on both desktop and mobile devices.
+- **User Authentication**: Secure login and registration for personalized experiences.
+- **Deployment**: The app is deployed on Render for easy access.
 
-## Technologies
+### Technologies
 
 - **Spring Boot** for building the web application.
 - **Spring MVC** for handling HTTP requests and responses.
@@ -37,8 +37,9 @@ Taco Cloud is a full-stack web application that allows users to design custom ta
 ### Prerequisites
 
 - **Java 17**
-- **Maven** installed.
-- An IDE (IntelliJ IDEA) for development.
+- **Maven**
+- IntelliJ IDEA
+- Docker
 
 ### Setup
 
@@ -47,59 +48,97 @@ Taco Cloud is a full-stack web application that allows users to design custom ta
    ```bash
    git clone https://github.com/annasergeevaGIT/taco.git
    cd taco
+   ```
+Start PostgreSQL & PgAdmin (http://localhost:5050):
+   ```bash
+   docker-compose up -d
+   ```
 
 Build the Project:
+   ```bash
+   ./mvnw clean package
+   ```
 
-Use Maven to build the project:
-
-mvn clean install
-
-1. **Run the Application:**
-
-Run the Spring Boot application using Maven:
-
-      mvn spring-boot:run
-
-Alternatively, run the generated jar file:
-
-      java -jar target/taco-cloud-0.0.1-SNAPSHOT.jar
+Run the Application:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
 Access the App:
+Open your web browser and navigate to http://localhost:8080 to access Taco Shop.
 
-Open your web browser and navigate to http://localhost:8080 to access Taco Cloud.
+### API Endpoints
+
+- GET /api/ingredients: Retrieve a list of all available ingredients.
+- POST /api/orders: Create a new order with selected ingredients.
+
+### Deployment
+
+🛠 Build the Docker Image
+
+   ```bash
+   docker build -t taco-deployment .
+   docker tag taco-deployment <yourusername>/taco-deployment:latest
+   docker push <yourusername>/taco-deployment:latest
+   ```
+The Taco App is deployed and can be accessed at the following URL: https://taco-deployment-latest.onrender.com/
 
 Project Structure
 -----------------
-    taco/
-    ├── src/
-    │   ├── main/
-    │   │   ├── java/tacos/          # Application source code
-    │   │   │   ├── TacoOrder.java   # Order model with validation annotations
-    │   │   │   ├── Taco.java        # Taco model
-    │   │   │   └── web/             # Controllers for design and order processing
-    │   │   ├── resources/
-    │   │   │   ├── static/          # Static assets (CSS, images, JavaScript)
-    │   │   │   └── templates/       # Thymeleaf templates (orderForm.html, design.html, etc.)
-    │   └── test/                    # Test cases
-    └── pom.xml                      # Maven configuration file
+      taco/
+      ├── src/
+      │   ├── main/
+      │   │   ├── java/
+      │   │   │   └── tacos/
+      │   │   │       ├── TacoApplication.java # Main Spring Boot entry point
+      │   │   │       ├── Taco.java # Entity: Taco
+      │   │   │       ├── Ingredient.java # Entity: Ingredient
+      │   │   │       ├── TacoOrder.java # Entity: Taco Order
+      │   │   │       ├── User.java # Entity: User
+      │   │   │       ├── data/
+      │   │   │       │   ├── OrderRepository.java # JPA repository for orders
+      │   │   │       │   ├── UserRepository.java # JPA repository for users
+      │   │   │       │   ├── TacoRepository.java # JPA repository for tacos
+      │   │   │       │   └── IngredientRepository.java # JPA repository for ingredients
+      │   │   │       ├── data/service/
+      │   │   │       │   └── OrderAdminService.java # Business logic for managing orders
+      │   │   │       ├── security/
+      │   │   │       │   ├── SecurityConfig.java # Spring Security configuration
+      │   │   │       │   ├── UserRepositoryUserDetailsService.java # Custom UserDetailsService
+      │   │   │       │   ├── RegistrationController.java # Handles user registration
+      │   │   │       │   └── RegistrationForm.java # DTO for registration
+      │   │   │       └── web/
+      │   │   │           ├── DesignTacoController.java # Handles taco design page
+      │   │   │           ├── CorsConfig.java # Cross-Origin configuration for REST API
+      │   │   │           ├── WebConfig.java # Web MVC configuration
+      │   │   │           ├── OrderController.java # Handles taco order requests
+      │   │   │           ├── AdminController.java # Admin-related endpoints
+      │   │   │           ├── IngredientByIdConverter.java # Custom Spring converter
+      │   │   │           └── HomeController.java # Landing/home page
+      │   │   └── resources/
+      │   │       ├── static.css/
+      │   │       │   └── styles.css # App-specific CSS
+      │   │       ├── static.images/ # Image assets
+      │   │       │   ├── TacoCloud.png
+      │   │       │   ├── favicon.svg
+      │   │       │   └── TacoShop.png
+      │   │       ├── templates/ # Thymeleaf templates
+      │   │       │   ├── design.html
+      │   │       │   ├── orderForm.html
+      │   │       │   ├── login.html
+      │   │       │   ├── registration.html
+      │   │       │   └── home.html
+      │   │       ├── application.properties # Spring Boot configuration
+      │   │       └── logback.xml # Logging configuration
+      │   └── test/ # Test source files
+      │       └── ... (contents not fully detailed in image/text)
+      ├── .env # Environment variables used in deployment
+      ├── .gitignore # Files ignored by Git
+      ├── docker-compose.yaml # Cloud Postgres & PgAdmin configuration
+      ├── Dockerfile # Docker build used in Render deployment
+      ├── LICENSE # Project License
+      └── pom.xml # Maven project configuration
 
-### Usage
-#### Design Your Taco:
-Navigate to /design to create your custom taco by selecting ingredients. The selected ingredients are stored in the session as you design each taco.
-
-#### Place Your Order:
-Once your taco designs are ready, go to /orders/current to review your order, enter delivery information, and provide payment details. Validation errors will be displayed next to the form fields using Thymeleaf and CSS.
-
-### Validation & Error Handling
-The application uses Spring’s validation framework with Hibernate Validator to enforce:
-
-Non-empty fields (e.g., delivery name, street, city, state, zip code).
-
-Properly formatted credit card numbers and expiration dates.
-
-Numeric validation for fields like CVV.
-
-Validation errors are displayed next to the form fields using Thymeleaf error attributes and styled via CSS.
 
 ### License
 This project is licensed under the MIT License.
