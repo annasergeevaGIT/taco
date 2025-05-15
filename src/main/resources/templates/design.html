@@ -4,11 +4,20 @@
 <head>
     <title>Taco Cloud</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <style>
+        .ingredient-group {
+            margin-bottom: 1.5em;
+        }
+        #totalPrice {
+            font-weight: bold;
+            color: #007700;
+        }
+    </style>
 </head>
 
 <body>
 <h1>Design your taco!</h1>
-<h2>Feelin' hungry, <span th:text="${user.fullname}">NAME</span>?</h2>
+<h2>Feelin' hungry, <span th:text="${user?.fullname ?: 'Guest'}">NAME</span>?</h2>
 <img th:src="@{/images/TacoCloud.png}"/>
 
 <form method="POST" th:action="@{/logout}" id="logoutForm">
@@ -26,8 +35,9 @@
             <h3>Designate your wrap:</h3>
             <div th:each="ingredient : ${wrap}">
                 <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                       th:value="${ingredient.id}" th:attr="data-price=${ingredient.price}"
+                       onchange="updateTotalPrice()"/>
+                <span th:text="|${ingredient.name} (${ingredient.price} €)|">INGREDIENT (PRICE)</span><br/>
             </div>
         </div>
 
@@ -35,8 +45,9 @@
             <h3>Pick your protein:</h3>
             <div th:each="ingredient : ${protein}">
                 <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                       th:value="${ingredient.id}" th:attr="data-price=${ingredient.price}"
+                       onchange="updateTotalPrice()"/>
+                <span th:text="|${ingredient.name} (${ingredient.price} €)|">INGREDIENT (PRICE)</span><br/>
             </div>
         </div>
 
@@ -44,8 +55,9 @@
             <h3>Choose your cheese:</h3>
             <div th:each="ingredient : ${cheese}">
                 <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                       th:value="${ingredient.id}" th:attr="data-price=${ingredient.price}"
+                       onchange="updateTotalPrice()"/>
+                <span th:text="|${ingredient.name} (${ingredient.price} €)|">INGREDIENT (PRICE)</span><br/>
             </div>
         </div>
 
@@ -53,8 +65,9 @@
             <h3>Determine your veggies:</h3>
             <div th:each="ingredient : ${veggies}">
                 <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                       th:value="${ingredient.id}" th:attr="data-price=${ingredient.price}"
+                       onchange="updateTotalPrice()"/>
+                <span th:text="|${ingredient.name} (${ingredient.price} €)|">INGREDIENT (PRICE)</span><br/>
             </div>
         </div>
 
@@ -62,24 +75,44 @@
             <h3>Select your sauce:</h3>
             <div th:each="ingredient : ${sauce}">
                 <input th:field="*{ingredients}" type="checkbox"
-                       th:value="${ingredient.id}"/>
-                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                       th:value="${ingredient.id}" th:attr="data-price=${ingredient.price}"
+                       onchange="updateTotalPrice()"/>
+                <span th:text="|${ingredient.name} (${ingredient.price} €)|">INGREDIENT (PRICE)</span><br/>
             </div>
         </div>
     </div>
 
     <div>
-
-
         <h3>Name your taco creation:</h3>
         <input type="text" th:field="*{name}"/>
         <span class="validationError"
               th:if="${#fields.hasErrors('name')}"
               th:errors="*{name}">Name Error</span>
-        <br/>
+        <br/><br/>
+
+        <p>Total Price: <span id="totalPrice">$0.00</span></p>
 
         <button>Submit Your Taco</button>
     </div>
 </form>
+
+<script>
+    function updateTotalPrice() {
+        const checkboxes = document.querySelectorAll('#tacoForm input[type="checkbox"]');
+        let total = 0;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const price = parseFloat(checkbox.getAttribute('data-price')) || 0;
+                total += price;
+            }
+        });
+
+        document.getElementById('totalPrice').textContent = '€' + total.toFixed(2);
+    }
+
+    // Initialize price on page load
+    window.addEventListener('DOMContentLoaded', updateTotalPrice);
+</script>
 </body>
 </html>

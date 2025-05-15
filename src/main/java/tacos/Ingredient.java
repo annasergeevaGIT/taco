@@ -16,8 +16,11 @@ public class Ingredient {
     private String id;
     private String name;
     private Type type;
+    private double price;
 
     public enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
     }
+
+
 }
